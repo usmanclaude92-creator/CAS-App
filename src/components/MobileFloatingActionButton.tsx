@@ -46,51 +46,39 @@ export const MobileFloatingActionButton: React.FC<MobileFloatingActionButtonProp
 
   const actionItems = [
     {
-      id: 'money-in',
-      title: 'Money In (Receipt)',
-      desc: 'Customer payment or direct cash receipt',
-      icon: <ArrowDownLeft className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
-      bg: 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200',
-      action: onOpenMoneyIn,
-    },
-    {
       id: 'client-invoice',
-      title: 'Client Invoice (Bill)',
-      desc: 'Raise project progress claim or customer billing',
-      icon: <FileText className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
-      bg: 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-200 dark:border-indigo-800 text-indigo-900 dark:text-indigo-200',
+      title: 'Client Invoice / IPC',
+      icon: <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
       action: onOpenClientInvoice,
     },
     {
-      id: 'money-out',
-      title: 'Money Out (Payment)',
-      desc: 'Direct payment to supplier, subbie, or party',
-      icon: <ArrowUpRight className="w-5 h-5 text-amber-600 dark:text-amber-400" />,
-      bg: 'bg-amber-50 dark:bg-amber-950/60 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200',
-      action: onOpenMoneyOut,
+      id: 'money-in',
+      title: 'Receipt from Client',
+      icon: <ArrowDownLeft className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+      action: onOpenMoneyIn,
     },
     {
       id: 'purchase',
-      title: 'Purchase Bill (Vendor)',
-      desc: 'Record materials, subcontracts, or plant hire bill',
-      icon: <Truck className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
-      bg: 'bg-blue-50 dark:bg-blue-950/60 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-200',
+      title: 'Vendor Purchase Bill',
+      icon: <Truck className="w-5 h-5 text-amber-600 dark:text-amber-400" />,
       action: onOpenPurchase,
+    },
+    {
+      id: 'money-out',
+      title: 'Payment to Vendors',
+      icon: <ArrowUpRight className="w-5 h-5 text-rose-600 dark:text-rose-400" />,
+      action: onOpenMoneyOut,
     },
     {
       id: 'expense',
       title: 'Direct Site Expense',
-      desc: 'Petty cash, site fuel, food, or labor wages',
-      icon: <Coins className="w-5 h-5 text-purple-600 dark:text-purple-400" />,
-      bg: 'bg-purple-50 dark:bg-purple-950/60 border-purple-200 dark:border-purple-800 text-purple-900 dark:text-purple-200',
+      icon: <Coins className="w-5 h-5 text-rose-600 dark:text-rose-400" />,
       action: onOpenExpense,
     },
     {
       id: 'transfer',
-      title: 'Account Transfer',
-      desc: 'Internal transfer between Bank & Cash accounts',
-      icon: <ArrowRightLeft className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
-      bg: 'bg-cyan-50 dark:bg-cyan-950/60 border-cyan-200 dark:border-cyan-800 text-cyan-900 dark:text-cyan-200',
+      title: 'Bank / Cash Transfer',
+      icon: <ArrowRightLeft className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />,
       action: onOpenTransfer,
     },
   ];
@@ -111,41 +99,24 @@ export const MobileFloatingActionButton: React.FC<MobileFloatingActionButtonProp
         {/* Speed Dial Menu Items */}
         {isOpen && (
           <div className="flex flex-col items-end gap-2.5 mb-3 w-[88vw] max-w-[340px] animate-in slide-in-from-bottom-5 fade-in duration-200">
-            <div className="w-full bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 p-2.5 space-y-1.5 backdrop-blur-md">
-              <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
-                    New Transaction
-                  </h4>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400">
-                    Select transaction category to open form
-                  </p>
-                </div>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-bold">
-                  OMR
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 gap-1 pt-1 max-h-[60vh] overflow-y-auto">
-                {actionItems.map((item) => (
+            <div className="w-full bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 py-1 max-h-[60vh] overflow-y-auto">
+              {actionItems.map((item, index) => (
+                <React.Fragment key={item.id}>
                   <button
-                    key={item.id}
                     type="button"
                     onClick={() => handleAction(item.action)}
-                    className={`flex items-center gap-3 p-3 min-h-[50px] rounded-xl border text-left transition-all active:scale-98 cursor-pointer touch-target-min ${item.bg}`}
+                    className="w-full flex items-center gap-3 px-4 py-3 min-h-[50px] text-left transition-colors active:scale-98 cursor-pointer touch-target-min hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-white dark:bg-slate-800 shadow-xs flex items-center justify-center shrink-0 border border-slate-200/60 dark:border-slate-700/60">
-                      {item.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-bold truncate">{item.title}</div>
-                      <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
-                        {item.desc}
-                      </p>
-                    </div>
+                    <span className="shrink-0">{item.icon}</span>
+                    <span className="text-sm text-slate-800 dark:text-slate-100 truncate">
+                      + {item.title}
+                    </span>
                   </button>
-                ))}
-              </div>
+                  {index % 2 === 1 && index !== actionItems.length - 1 && (
+                    <div className="border-t border-slate-100 dark:border-slate-800" />
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         )}
