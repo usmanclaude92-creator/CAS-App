@@ -257,25 +257,6 @@ export const CustomersView: React.FC<CustomersViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-lg font-bold text-slate-900">Customers &amp; Accounts Receivable</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Client billing, Interim Payment Certificates (IPC), cash collections, and receivable aging
-          </p>
-        </div>
-        <div className="flex items-center gap-2.5">
-          <button
-            onClick={handleExportAllCustomers}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 cursor-pointer touch-target-min"
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
-            Export Receivables Summary
-          </button>
-          <button
-            onClick={onOpenNewCustomer}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-blue-800 hover:bg-blue-700 cursor-pointer shadow touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            New Customer
-          </button>
         </div>
       </div>
 

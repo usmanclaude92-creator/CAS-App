@@ -627,40 +627,6 @@ export const PurchasesView: React.FC<PurchasesViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-lg font-bold text-slate-900">Purchases &amp; Accounts Payable</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Procurement bills, material purchases, subcontractor orders, and vendor statements
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            onClick={activeTab === 'bills' ? handleExportBills : handleExportAllVendors}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 cursor-pointer shadow-xs transition-colors touch-target-min"
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
-            {activeTab === 'bills' ? 'Export Bills (Excel)' : 'Export Payables Summary'}
-          </button>
-          <button
-            onClick={onOpenMoneyOut}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-slate-900 hover:bg-slate-800 cursor-pointer shadow-xs transition-colors touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            Settle Payment
-          </button>
-          <button
-            onClick={onOpenPurchase}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-amber-700 hover:bg-amber-600 cursor-pointer shadow-xs transition-colors touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            Record Purchase Bill
-          </button>
-          <button
-            onClick={onOpenNewVendor}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 cursor-pointer shadow-xs transition-colors touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            New Vendor
-          </button>
         </div>
       </div>
 
