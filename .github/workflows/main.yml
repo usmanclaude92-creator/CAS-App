@@ -34,7 +34,13 @@ jobs:
           npm test
 
       - name: Build web bundle with relative base paths
+        # Explicit here as defense-in-depth: src/services/supabaseClient.ts
+        # also falls back to these same values if unset, but a build should
+        # never silently rely on that fallback matching the real project.
         run: npx vite build --base=./
+        env:
+          VITE_SUPABASE_URL: https://krclqyvsgxrcqojfmyaq.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyY2xxeXZzZ3hyY3FvamZteWFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwOTg3NDAsImV4cCI6MjEwNTY3NDc0MH0.KEV7_vfYPUmdJyRHE89xrC_BPFyQlw7FT-TSsmsMW5c
 
       - name: Upload Web Build Artifact
         uses: actions/upload-artifact@v4
