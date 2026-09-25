@@ -428,6 +428,33 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const getSection = () => {
+    switch (activeView) {
+      case 'dashboard':
+      case 'project_dashboard':
+      case 'approvals':
+      case 'reports':
+        return 'Overview';
+      case 'projects':
+      case 'banking':
+      case 'customers':
+      case 'purchases':
+      case 'expenses':
+        return 'Transactions';
+      case 'masters':
+        return 'Master Data';
+      case 'system_config':
+      case 'audit':
+      case 'users':
+      case 'roles':
+      case 'workflow_settings':
+      case 'master_import_audit':
+        return 'Administration & Setup';
+      default:
+        return '';
+    }
+  };
+
   const getTitle = () => {
     switch (activeView) {
       case 'dashboard':
@@ -488,6 +515,9 @@ export const Header: React.FC<HeaderProps> = ({
           <Menu className="w-5 h-5 text-slate-700 dark:text-slate-200" />
         </button>
         <div className="min-w-0">
+          <div className="hidden sm:block text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider truncate">
+            {getSection()}
+          </div>
           <h1 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white leading-tight truncate">
             {getTitle()}
           </h1>
