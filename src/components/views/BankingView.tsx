@@ -107,47 +107,6 @@ export const BankingView: React.FC<BankingViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-lg font-bold text-slate-900">Banking &amp; Treasury Operations</h2>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Commercial Bank Accounts, Cash in Hand, Site Petty Cash floats, and Zero-Revenue Internal Transfers
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            onClick={onOpenTransfer}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-indigo-700 hover:bg-indigo-600 cursor-pointer shadow touch-target-min"
-          >
-            <ArrowRightLeft className="w-3.5 h-3.5" />
-            + Internal Transfer
-          </button>
-          <button
-            onClick={onOpenMoneyIn}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-emerald-700 hover:bg-emerald-600 cursor-pointer shadow touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            + Money In
-          </button>
-          <button
-            onClick={onOpenMoneyOut}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-slate-900 hover:bg-slate-800 cursor-pointer shadow touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            + Money Out
-          </button>
-          <button
-            onClick={onOpenNewBankAccount}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 cursor-pointer touch-target-min"
-          >
-            <Plus className="w-3.5 h-3.5 text-slate-500" />
-            Add Bank A/C
-          </button>
-          <button
-            onClick={handleExportBankBook}
-            className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] text-xs font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 cursor-pointer touch-target-min"
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
-            Export Bank Book
-          </button>
         </div>
       </div>
 
