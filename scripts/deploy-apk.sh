@@ -7,7 +7,7 @@ set -e
 # ==============================================================================
 
 APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
-PACKAGE_NAME="com.example.myapplication"
+PACKAGE_NAME="com.artifysols.cas"
 ACTIVITY_NAME=".MainActivity"
 COMPONENT="${PACKAGE_NAME}/${ACTIVITY_NAME}"
 

@@ -69,7 +69,7 @@ echo "=== [4/4] Deploying APK via 'adb install -r' ==="
 adb install -r "$APK_PATH"
 
 echo "=== Launching MainActivity ==="
-PACKAGE_NAME="com.example.myapplication"
+PACKAGE_NAME="com.artifysols.cas"
 MAIN_ACTIVITY=".MainActivity"
 adb shell am start -n "${PACKAGE_NAME}/${PACKAGE_NAME}${MAIN_ACTIVITY}" || true
 
