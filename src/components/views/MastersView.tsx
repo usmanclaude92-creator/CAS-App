@@ -72,18 +72,6 @@ export const MastersView: React.FC<MastersViewProps> = ({
               Operational Data
             </span>
           </h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-            Chart of Accounts, Project Master, Customer Master, Vendor Master, and Expense Heads
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onOpenSupabaseSettings}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900 border border-emerald-200 dark:border-emerald-800 cursor-pointer"
-          >
-            Supabase DB Config
-          </button>
         </div>
       </div>
 

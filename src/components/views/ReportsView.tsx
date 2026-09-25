@@ -709,66 +709,7 @@ export const ReportsView: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-bold text-slate-900">Financial Reports &amp; Statements</h2>
-            <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-              NUMERIC(18, 3) OMR
-            </span>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Real-time IFRS/GAAP-compliant construction accounting reports with interactive quick filtering
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          {isAnyFilterActive && (
-            <button
-              onClick={handleResetFilters}
-              className="inline-flex items-center gap-1 px-3 py-2 min-h-[40px] text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-lg border border-rose-200 transition-colors cursor-pointer touch-target-min"
-              title="Reset all quick filters"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              Reset Filters
-            </button>
-          )}
-
-          <button
-            type="button"
-            onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] text-xs font-semibold rounded-lg text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer shadow-xs touch-target-min"
-            title="Print report (PDF / Printer)"
-          >
-            <Printer className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-            Print Report
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleExport('csv')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] text-xs font-semibold rounded-lg text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900 border border-emerald-300 dark:border-emerald-700 transition-colors cursor-pointer shadow-xs touch-target-min"
-            title="Download active financial table in Excel-compatible CSV format"
-          >
-            <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            Export to CSV
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleExport('excel')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] text-xs font-medium rounded-lg text-white bg-emerald-700 hover:bg-emerald-600 transition-colors cursor-pointer shadow touch-target-min"
-            title="Download active financial table as Excel workbook (.xlsx)"
-          >
-            <FileSpreadsheet className="w-4 h-4" />
-            Export Table (Excel)
-          </button>
-
-          <button
-            type="button"
-            onClick={handleExportAll}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[40px] text-xs font-semibold rounded-lg text-white bg-slate-900 hover:bg-slate-800 transition-colors cursor-pointer shadow touch-target-min"
-            title="Export all 8 financial statements into a single consolidated multi-sheet Excel workbook"
-          >
-            <FolderDown className="w-4 h-4 text-emerald-400" />
-            Export All (8 Sheets .xlsx)
-          </button>
         </div>
       </div>
 

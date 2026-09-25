@@ -106,20 +106,6 @@ export const ApprovalsView: React.FC = () => {
             <Clock className="w-6 h-6 text-amber-500" />
             <span>Pending Approvals &amp; Governance Queue</span>
           </h2>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Enforces strict Separation of Duties (SOD), role limits, and project-scoped audit authorization.
-          </p>
-        </div>
-
-        {/* Current user limits badge */}
-        <div className="flex items-center gap-3 bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-xs text-xs">
-          <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-          <div>
-            <span className="font-semibold text-slate-900 dark:text-white">{currentUser?.fullName}</span>
-            <span className="block text-[11px] text-slate-500 dark:text-slate-400">
-              Role: <strong className="text-blue-600 dark:text-blue-400">{currentUser?.roleName}</strong>
-            </span>
-          </div>
         </div>
       </div>
 
@@ -143,45 +129,6 @@ export const ApprovalsView: React.FC = () => {
           </div>
         </div>
       )}
-
-      {/* Filters Bar */}
-      <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs flex flex-wrap items-center gap-3 text-xs">
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-slate-400" />
-          <span className="font-semibold text-slate-700 dark:text-slate-300">Filter By:</span>
-        </div>
-
-        <select
-          value={filterType}
-          onChange={(e) => setFilterType(e.target.value)}
-          className="rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="ALL">All Transaction Types</option>
-          <option value="CLIENT_INVOICE">Client Invoices / IPC</option>
-          <option value="PURCHASE">Purchases / Bills</option>
-          <option value="MONEY_IN">Money In / Receipts</option>
-          <option value="MONEY_OUT">Money Out / Payments</option>
-          <option value="EXPENSE">Direct Site Expenses</option>
-          <option value="TRANSFER">Bank / Cash Transfers</option>
-        </select>
-
-        <select
-          value={filterProject}
-          onChange={(e) => setFilterProject(e.target.value)}
-          className="rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="ALL">All Authorized Projects</option>
-          {accessibleProjects.map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.code} - {p.name}
-            </option>
-          ))}
-        </select>
-
-        <div className="ml-auto text-slate-500 dark:text-slate-400">
-          Showing <strong>{filtered.length}</strong> item(s) awaiting approval or posting
-        </div>
-      </div>
 
       {/* Pending Table */}
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs overflow-hidden">
