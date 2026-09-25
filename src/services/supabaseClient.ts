@@ -3,10 +3,16 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 const STORAGE_URL_KEY = 'cas_supabase_url';
 const STORAGE_KEY_KEY = 'cas_supabase_anon_key';
 
-// Default Supabase project credentials
-export const DEFAULT_SUPABASE_URL = 'https://cfkymotcnccgvkpmcevp.supabase.co';
+// Default Supabase project credentials — must be the same "cas-accounting"
+// project (krclqyvsgxrcqojfmyaq) the CAS web app uses. This was previously
+// pointed at an unrelated "artifysols-backend" project (cfkymotcnccgvkpmcevp)
+// with a completely different schema (CMS/CRM tables, no money_in/purchases/
+// client_invoices/etc.), which silently broke every data-driven page in this
+// app whenever the build fell back to these defaults (i.e. whenever CI didn't
+// inject VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY — which it never did).
+export const DEFAULT_SUPABASE_URL = 'https://krclqyvsgxrcqojfmyaq.supabase.co';
 export const DEFAULT_SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNma3ltb3RjbmNjZ3ZrcG1jZXZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4NDIyMjAsImV4cCI6MjEwNTQxODIyMH0.UydSETlKBKs3DbPuueKG1Oh8mQdWv-iRqPOSYybgF70';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtyY2xxeXZzZ3hyY3FvamZteWFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwOTg3NDAsImV4cCI6MjEwNTY3NDc0MH0.KEV7_vfYPUmdJyRHE89xrC_BPFyQlw7FT-TSsmsMW5c';
 
 function cleanString(val?: unknown): string {
   if (!val || typeof val !== 'string') return '';

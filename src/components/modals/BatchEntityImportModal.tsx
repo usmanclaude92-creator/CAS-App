@@ -2,20 +2,17 @@ import React, { useState, useRef } from 'react';
 import {
   X,
   UploadCloud,
-  FileSpreadsheet,
   CheckCircle2,
   AlertTriangle,
   XCircle,
   Download,
   Users,
   Truck,
-  ArrowRight,
   Database,
   RefreshCw,
 } from 'lucide-react';
 import { accountingService } from '../../services/accountingService';
-import { authService } from '../../services/authService';
-import { supabaseService } from '../../services/supabaseClient';
+import {} from '../../services/authService';
 import { useToast } from '../../context/ToastContext';
 
 export type BatchEntityType = 'customers' | 'vendors';
@@ -53,7 +50,7 @@ export const BatchEntityImportModal: React.FC<BatchEntityImportModalProps> = ({
   const { toast } = useToast();
   const [entityType, setEntityType] = useState<BatchEntityType>(defaultType);
   const [step, setStep] = useState<'upload' | 'validate' | 'success'>('upload');
-  const [file, setFile] = useState<File | null>(null);
+  const [, setFile] = useState<File | null>(null);
   const [rows, setRows] = useState<ValidatedRow[]>([]);
   const [isCommitting, setIsCommitting] = useState(false);
   const [commitResult, setCommitResult] = useState<{ imported: number; failed: number } | null>(null);
@@ -240,13 +237,11 @@ export const BatchEntityImportModal: React.FC<BatchEntityImportModalProps> = ({
     let imported = 0;
     let failed = 0;
 
-    const supabaseClient = supabaseService.getClient();
-
     try {
       for (const row of validRows) {
         try {
           if (entityType === 'customers') {
-            accountingService.createCustomer({
+            await accountingService.createCustomer({
               code: row.data.code,
               name: row.data.name,
               contactPerson: row.data.contactPerson,
@@ -257,22 +252,8 @@ export const BatchEntityImportModal: React.FC<BatchEntityImportModalProps> = ({
               status: 'active',
               remarks: row.data.remarks || 'Batch imported via CSV',
             });
-
-            // If Supabase is connected, commit to Supabase customers table
-            if (supabaseClient) {
-              await supabaseClient.from('customers').insert({
-                code: row.data.code,
-                name: row.data.name,
-                contact_person: row.data.contactPerson,
-                phone: row.data.phone,
-                email: row.data.email,
-                address: row.data.address,
-                opening_balance: row.data.openingBalance,
-                status: 'active',
-              });
-            }
           } else {
-            accountingService.createVendor({
+            await accountingService.createVendor({
               code: row.data.code,
               name: row.data.name,
               contactPerson: row.data.contactPerson,
@@ -283,22 +264,9 @@ export const BatchEntityImportModal: React.FC<BatchEntityImportModalProps> = ({
               status: 'active',
               remarks: row.data.remarks || 'Batch imported via CSV',
             });
-
-            if (supabaseClient) {
-              await supabaseClient.from('vendors').insert({
-                code: row.data.code,
-                name: row.data.name,
-                contact_person: row.data.contactPerson,
-                phone: row.data.phone,
-                email: row.data.email,
-                address: row.data.address,
-                opening_balance: row.data.openingBalance,
-                status: 'active',
-              });
-            }
           }
           imported++;
-        } catch (e) {
+        } catch {
           failed++;
         }
       }

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   Sliders,
-  ShieldCheck,
   Save,
   CheckCircle2,
   AlertCircle,
   DollarSign,
   Scale,
-  Users,
 } from 'lucide-react';
 import { WorkflowSettings } from '../../types/auth';
 import { authService } from '../../services/authService';
@@ -31,9 +29,9 @@ export const WorkflowSettingsView: React.FC = () => {
     });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setFeedback(null);
-    const res = authService.updateWorkflowSettings(settings);
+    const res = await authService.updateWorkflowSettings(settings);
     if (res.success) {
       setFeedback({
         type: 'success',
