@@ -4,8 +4,6 @@ import {
   Clock,
   Building2,
   Landmark,
-  MoreHorizontal,
-  ChevronDown,
   ChevronUp,
   X,
   Users,
@@ -180,8 +178,6 @@ export const MobileBottomTabBar: React.FC<MobileBottomTabBarProps> = ({
   const isApprovalsActive = activeView === 'approvals';
   const isProjectsActive = activeView === 'projects';
   const isBankingActive = activeView === 'banking';
-  const isMoreActive =
-    !isDashboardActive && !isApprovalsActive && !isProjectsActive && !isBankingActive;
 
   // Permission checks for views
   const hasApprovalsAccess = authService.hasPermission('approvals.view');
@@ -240,57 +236,8 @@ export const MobileBottomTabBar: React.FC<MobileBottomTabBarProps> = ({
         }`}
       >
         <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/90 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] pb-[max(0.375rem,env(safe-area-inset-bottom))]">
-          {/* Top Control Handle & Table Density Toolbar */}
-          <div className="flex items-center justify-between px-3 py-1 border-b border-slate-100 dark:border-slate-800/60 text-[11px] text-slate-500 dark:text-slate-400">
-            {/* Table Spacing / Compact Mode Toggle */}
-            <button
-              type="button"
-              onClick={onToggleTableCompact}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 min-h-[36px] rounded-lg font-medium transition-colors cursor-pointer ${
-                isTableCompact
-                  ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800'
-                  : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400'
-              }`}
-              title="Toggle compact table cell padding for smaller screens"
-            >
-              {isTableCompact ? (
-                <>
-                  <Minimize2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                  <span>Compact Tables: <strong>On</strong></span>
-                </>
-              ) : (
-                <>
-                  <Maximize2 className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Table Spacing: Normal</span>
-                </>
-              )}
-            </button>
-
-            {/* Drag Handle Indicator */}
-            <button
-              type="button"
-              onClick={() => handleToggleCollapse(true)}
-              className="px-6 py-2 min-h-[36px] group flex flex-col items-center justify-center cursor-pointer"
-              aria-label="Collapse navigation bar"
-              title="Click or drag to collapse"
-            >
-              <div className="w-12 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full group-hover:bg-indigo-500 transition-colors" />
-            </button>
-
-            {/* Collapse / Hide Button */}
-            <button
-              type="button"
-              onClick={() => handleToggleCollapse(true)}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 min-h-[36px] rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 font-medium transition-colors cursor-pointer"
-              title="Collapse bottom bar to give full screen height to data tables"
-            >
-              <span>Hide</span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-          </div>
-
           {/* Tab Navigation Items (48px min touch targets, Material 3 Pill Design) */}
-          <nav className="grid grid-cols-5 items-center px-2 py-1 gap-1">
+          <nav className="grid grid-cols-4 items-center px-2 py-1 gap-1">
             {/* Tab 1: Dashboard */}
             <button
               type="button"
@@ -408,33 +355,6 @@ export const MobileBottomTabBar: React.FC<MobileBottomTabBarProps> = ({
                 }`}
               >
                 Banking
-              </span>
-            </button>
-
-            {/* Tab 5: More Modules */}
-            <button
-              type="button"
-              onClick={() => setIsMoreSheetOpen(true)}
-              className="flex flex-col items-center justify-center py-1 px-1 min-h-[48px] rounded-xl transition-all cursor-pointer group active:scale-95"
-              aria-label="Open more modules and quick actions"
-            >
-              <div
-                className={`w-12 h-7 rounded-full flex items-center justify-center transition-all ${
-                  isMoreActive || isMoreSheetOpen
-                    ? 'bg-indigo-600 text-white shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 group-hover:bg-slate-100 dark:group-hover:bg-slate-800'
-                }`}
-              >
-                <MoreHorizontal className="w-4 h-4" />
-              </div>
-              <span
-                className={`text-[10px] mt-1 tracking-tight leading-none ${
-                  isMoreActive || isMoreSheetOpen
-                    ? 'font-bold text-indigo-600 dark:text-indigo-400'
-                    : 'font-medium text-slate-500 dark:text-slate-400'
-                }`}
-              >
-                {isMoreActive ? getActiveTabLabel(activeView) : 'More'}
               </span>
             </button>
           </nav>
