@@ -16,6 +16,13 @@ import {
 } from 'lucide-react';
 import { authService } from '../services/authService';
 
+const SECTION_LABELS: Record<string, string> = {
+  overview: 'Overview',
+  transactions: 'Transactions',
+  masters: 'Master Data',
+  system: 'Administration & Setup',
+};
+
 export type NavView =
   | 'dashboard'
   | 'project_dashboard'
@@ -54,6 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onLogout,
 }) => {
   const isSuperAdmin = authService.isSuperAdmin();
+  const currentUser = authService.getCurrentUser();
 
   // All possible navigation items with permission checks
   const allNavItems: {
@@ -62,17 +70,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
     icon: React.FC<{ className?: string }>;
     permission?: string;
     superAdminOnly?: boolean;
-    section?: 'main' | 'masters' | 'system';
+    section?: 'overview' | 'transactions' | 'masters' | 'system';
     badge?: string;
   }[] = [
-    { id: 'dashboard', label: 'Executive Dashboard', icon: LayoutDashboard, permission: 'dashboard.view', section: 'main' },
-    { id: 'approvals', label: 'Pending Approvals', icon: Clock, permission: 'approvals.view', section: 'main' },
-    { id: 'projects', label: 'Projects & Costing', icon: Building2, permission: 'projects.view', section: 'main' },
-    { id: 'banking', label: 'Banking & Treasury', icon: Landmark, permission: 'treasury.view', section: 'main' },
-    { id: 'customers', label: 'Clients & Receivables', icon: Users, permission: 'customers.view', section: 'main' },
-    { id: 'purchases', label: 'Vendors & Payables', icon: Truck, permission: 'purchases.view', section: 'main' },
-    { id: 'expenses', label: 'Direct Site Expenses', icon: Coins, permission: 'expenses.view', section: 'main' },
-    { id: 'reports', label: 'Financial Reports', icon: FileBarChart, permission: 'reports.view', section: 'main' },
+    { id: 'dashboard', label: 'Executive Dashboard', icon: LayoutDashboard, permission: 'dashboard.view', section: 'overview' },
+    { id: 'approvals', label: 'Pending Approvals', icon: Clock, permission: 'approvals.view', section: 'overview' },
+    { id: 'reports', label: 'Financial Reports', icon: FileBarChart, permission: 'reports.view', section: 'overview' },
+    { id: 'projects', label: 'Projects & Costing', icon: Building2, permission: 'projects.view', section: 'transactions' },
+    { id: 'banking', label: 'Banking & Treasury', icon: Landmark, permission: 'treasury.view', section: 'transactions' },
+    { id: 'customers', label: 'Clients & Receivables', icon: Users, permission: 'customers.view', section: 'transactions' },
+    { id: 'purchases', label: 'Vendors & Payables', icon: Truck, permission: 'purchases.view', section: 'transactions' },
+    { id: 'expenses', label: 'Direct Site Expenses', icon: Coins, permission: 'expenses.view', section: 'transactions' },
     { id: 'masters', label: 'Business Masters', icon: Layers, permission: 'settings.view', section: 'masters' },
     { id: 'system_config', label: 'System Configuration', icon: Sliders, permission: 'settings.view', section: 'system' },
     { id: 'audit', label: 'Immutable Audit Log', icon: ShieldAlert, permission: 'audit.view', section: 'system' },
@@ -131,14 +139,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             return (
               <React.Fragment key={item.id}>
-                {isNewSection && item.section === 'masters' && (
-                  <div className="pt-3 pb-1 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                    Master Data
-                  </div>
-                )}
-                {isNewSection && item.section === 'system' && (
-                  <div className="pt-3 pb-1 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                    Administration &amp; Setup
+                {isNewSection && item.section && (
+                  <div
+                    className={`px-3 pb-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider ${
+                      index === 0 ? 'pt-0' : 'pt-3'
+                    }`}
+                  >
+                    {SECTION_LABELS[item.section]}
                   </div>
                 )}
                 <button
@@ -163,14 +170,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
           })}
         </nav>
 
-        {/* Footer: Logout */}
-        <div className="p-3 border-t border-slate-800">
+        {/* Footer: User Profile + Logout */}
+        <div className="border-t border-slate-800 p-3 flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+            {currentUser?.fullName ? currentUser.fullName.charAt(0).toUpperCase() : <Users className="w-4 h-4" />}
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-xs font-semibold text-white truncate">{currentUser?.fullName || 'User'}</div>
+            <div className="text-[10px] text-slate-400 truncate">{currentUser?.roleName || ''}</div>
+          </div>
           <button
             onClick={onLogout}
-            className="w-full px-3 py-2 rounded-lg text-xs font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-950/50 border border-transparent hover:border-rose-900 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            title="Sign Out"
+            aria-label="Sign Out"
+            className="w-7 h-7 rounded-lg text-slate-400 hover:text-rose-300 hover:bg-rose-950/50 flex items-center justify-center transition-colors cursor-pointer shrink-0"
           >
             <LogOut className="w-3.5 h-3.5" />
-            <span>Sign Out</span>
           </button>
         </div>
       </aside>
