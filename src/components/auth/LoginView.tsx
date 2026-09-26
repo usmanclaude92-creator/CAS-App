@@ -12,7 +12,6 @@ import {
 } from 'lucide-react';
 import { authService } from '../../services/authService';
 import { ThemeToggle } from '../ThemeToggle';
-import { ArtifyLogo } from '../ArtifyLogo';
 
 interface LoginViewProps {
   onLoginSuccess: () => void;
@@ -70,11 +69,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col justify-between transition-colors duration-200">
       {/* Top Header Bar with Theme Toggle */}
-      <header className="p-4 sm:p-6 flex items-center justify-between max-w-7xl w-full mx-auto">
-        <div className="flex items-center gap-3">
-          <ArtifyLogo className="h-10 w-auto rounded-lg shadow-sm" />
-        </div>
-
+      <header className="p-4 sm:p-6 flex items-center justify-end max-w-7xl w-full mx-auto">
         <div className="flex items-center gap-2">
           <span className="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400">Appearance:</span>
           <ThemeToggle variant="dropdown" />
@@ -83,38 +78,29 @@ export const LoginView: React.FC<LoginViewProps> = ({
 
       {/* Main Login Card */}
       <main className="flex-1 flex items-center justify-center p-4 sm:p-6">
-        <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6">
+        <div className="w-full max-w-md space-y-4">
+          {/* Brand Logo Header - 60% of container width, background matching screen */}
+          <div className="w-full flex justify-center items-center py-1">
+            {/* Light Mode Logo */}
+            <img
+              src="/artify-logo-light.png"
+              alt="Artify Construction Accounting System"
+              className="w-[60%] h-auto object-contain block dark:hidden select-none bg-transparent"
+            />
+            {/* Dark Mode Logo */}
+            <img
+              src="/artify-logo.png"
+              alt="Artify Construction Accounting System"
+              className="w-[60%] h-auto object-contain hidden dark:block select-none bg-transparent"
+            />
+          </div>
+
+          <div className="w-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8 space-y-6">
           <div className="text-center space-y-1">
             <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
               Sign In to Your Account
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
-              Enter your corporate credentials to access the financial ledger
-            </p>
           </div>
-
-          {sessionExpiredNotice && (
-            <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/80 text-xs text-amber-800 dark:text-amber-200 flex items-start gap-2.5 animate-in fade-in">
-              <ShieldCheck className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-              <div className="flex-1 min-w-0">
-                <span className="font-bold block text-amber-900 dark:text-amber-100">
-                  Security Timeout
-                </span>
-                <span className="text-[11px] leading-relaxed">
-                  {sessionExpiredNotice}
-                </span>
-              </div>
-              {onClearExpiredNotice && (
-                <button
-                  type="button"
-                  onClick={onClearExpiredNotice}
-                  className="text-amber-500 hover:text-amber-700 text-xs font-bold shrink-0 ml-1"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-          )}
 
           {errorMessage && (
             <div className="p-3.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2.5 animate-in fade-in">
@@ -213,6 +199,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
               )}
             </button>
           </form>
+          </div>
         </div>
       </main>
 
@@ -272,10 +259,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="p-4 text-center text-xs text-slate-400 dark:text-slate-600">
-        &copy; 2026 Construction Accounting &amp; Financial Reporting ERP &bull; Compliant with Omani Commercial Law &bull; Currency OMR
-      </footer>
     </div>
   );
 };

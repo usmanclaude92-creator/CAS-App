@@ -189,12 +189,6 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
 
       {/* Expense Head Breakdown Cards */}
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold text-slate-600 uppercase tracking-wider">
-            Cost Categories &amp; Heads ({state.expenseHeads.length})
-          </span>
-        </div>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {headBreakdown.map((hb) => (
             <div
@@ -235,19 +229,6 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
               </div>
             </div>
           ))}
-
-          {/* Quick Add Category Card */}
-          <button
-            type="button"
-            id="card-quick-add-category"
-            onClick={() => setIsAddCategoryModalOpen(true)}
-            className="p-3 rounded-xl border border-dashed border-rose-300 bg-rose-50/40 hover:bg-rose-50 hover:border-rose-400 text-xs cursor-pointer transition-all flex flex-col items-center justify-center text-center group min-h-[72px]"
-          >
-            <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 mb-1 group-hover:scale-110 transition-transform">
-              <Plus className="w-3.5 h-3.5" />
-            </div>
-            <span className="text-[11px] font-semibold text-rose-700">+ New Category</span>
-          </button>
         </div>
       </div>
 
