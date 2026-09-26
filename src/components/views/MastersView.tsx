@@ -136,25 +136,6 @@ export const MastersView: React.FC<MastersViewProps> = ({
           <div>
             <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-slate-800 dark:text-white">Projects Master List</h3>
-              <div className="flex items-center gap-2">
-                {/* STRICT CHECK: Super Admin only bulk import button */}
-                {canImportMasterData && (
-                  <button
-                    onClick={() => setImportModalType('projects')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 border border-emerald-200 dark:border-emerald-800 cursor-pointer transition-colors"
-                  >
-                    <UploadCloud className="w-3.5 h-3.5" />
-                    <span>Import Projects (Super Admin)</span>
-                  </button>
-                )}
-                <button
-                  onClick={onOpenNewProject}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg text-white bg-slate-900 dark:bg-blue-600 hover:bg-slate-800 dark:hover:bg-blue-700 cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  Add Project
-                </button>
-              </div>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">

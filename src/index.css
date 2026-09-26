@@ -391,8 +391,12 @@ button, a, input, select, textarea {
 }
 
 /* Prevent horizontal overflow globally on mobile devices (fixes hidden right side & scroll lock) */
+/* overflow-y is pinned to visible so html/body stay a single scrolling context —
+   otherwise overflow-x: hidden implicitly computes overflow-y: auto on both
+   elements, which breaks position: sticky headers in WebView. */
 html, body {
   overflow-x: hidden;
+  overflow-y: visible;
   max-width: 100vw;
   box-sizing: border-box;
 }
