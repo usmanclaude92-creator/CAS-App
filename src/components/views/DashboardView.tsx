@@ -961,7 +961,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       />
 
       {/* 2. Primary Executive KPI Cards Grid (Scope & Period Dynamic) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {/* KPI Card 1: Treasury Liquid Funds / Contract Target */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-5 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all">
           <div className="flex items-center justify-between">
