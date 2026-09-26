@@ -184,7 +184,7 @@ export const CashFlowProjectionCard: React.FC<CashFlowProjectionCardProps> = ({
       </div>
 
       {/* 30 / 60 / 90 Days High-Level Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/20 dark:bg-slate-900/30">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/20 dark:bg-slate-900/30">
         {/* Next 30 Days Card */}
         <button
           type="button"
